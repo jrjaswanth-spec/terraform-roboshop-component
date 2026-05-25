@@ -62,7 +62,7 @@ resource "aws_ami_from_instance" "main" {
 }
 
 resource "aws_lb_target_group" "main" {
-  name     = "${local.common_name_suffix}-{var.component}"
+  name     = "${local.common_name_suffix}-${var.component}"
   port     = local.tg_port # if frontend port no is 80, otherwise port is 8080
   protocol = "HTTP"
   vpc_id   = local.vpc_id
@@ -81,7 +81,7 @@ resource "aws_lb_target_group" "main" {
 }
 
 resource "aws_launch_template" "main" {
-  name = "${local.common_name_suffix}-{var.component}"
+  name = "${local.common_name_suffix}-${var.component}"
   image_id = aws_ami_from_instance.main.id
 
   instance_initiated_shutdown_behavior = "terminate"
