@@ -1,7 +1,7 @@
 locals {
   common_name_suffix = "${var.project_name}-${var.environment}" # roboshop-dev
   private_subnet_id = split(",", data.aws_ssm_parameter.private_subnet_ids.value)[0]
-  vpc_id = data.aws_ssm_parameter.vpc_id
+  vpc_id = data.aws_ssm_parameter.vpc_id.value
   sg_id = data.aws_ssm_parameter.sg_id.value
   tg_port = var.component == "frontend" ? 80 : 8080
   health_check_path = var.component == "frontend" ? "/" : "/health"
