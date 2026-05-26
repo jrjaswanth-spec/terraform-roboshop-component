@@ -56,7 +56,7 @@ resource "aws_ami_from_instance" "main" {
   tags = merge (
         local.common_tags,
         {
-            Name = "${local.common_name_suffix}-{var.component}-ami" # roboshop-dev-catalogue
+            Name = "${local.common_name_suffix}-${var.component}-ami" # roboshop-dev-catalogue
         }
   )
 }
@@ -99,7 +99,7 @@ resource "aws_launch_template" "main" {
     tags = merge(
       local.common_tags,
       {
-        Name = "${local.common_name_suffix}-{var.component}"
+        Name = "${local.common_name_suffix}-${var.component}"
       }
     )
   }
@@ -111,7 +111,7 @@ resource "aws_launch_template" "main" {
     tags = merge(
       local.common_tags,
       {
-        Name = "${local.common_name_suffix}-{var.component}"
+        Name = "${local.common_name_suffix}-${var.component}"
 
       }
     )
@@ -121,14 +121,14 @@ resource "aws_launch_template" "main" {
   tags = merge(
       local.common_tags,
       {
-        Name = "${local.common_name_suffix}-{var.component}"
+        Name = "${local.common_name_suffix}-${var.component}"
       }
   )
 
 }
 
 resource "aws_autoscaling_group" "main" {
-  name                      = "${local.common_name_suffix}-{var.component}"
+  name                      = "${local.common_name_suffix}-${var.component}"
   max_size                  = 10
   min_size                  = 1
   health_check_grace_period = 100
@@ -153,7 +153,7 @@ resource "aws_autoscaling_group" "main" {
     for_each = merge(
       local.common_tags,
       {
-        Name = "${local.common_name_suffix}-{var.component}"
+        Name = "${local.common_name_suffix}-${var.component}"
       }
     )
     content {
